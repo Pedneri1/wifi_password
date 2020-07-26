@@ -14,6 +14,4 @@ def deps do
 end
 ```
 
-<!-- Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/wifi_password](https://hexdocs.pm/wifi_password). -->
+The docs can be found at [https://hex.pm/packages/wifi_password](https://hex.pm/packages/wifi_password)
