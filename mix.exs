@@ -12,8 +12,16 @@ defmodule WifiPassword.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: description(),
-      docs: docs()
+      docs: docs(),
+      package: package()
     ]
+  end
+
+  defp package do
+    %{
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => @source_url}
+    }
   end
 
   def application do
