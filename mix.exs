@@ -32,7 +32,8 @@ defmodule WifiPassword.MixProject do
 
   defp deps do
     [
-      {:credo, "~> 1.4", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.22", only: [:dev, :docs], runtime: false}
     ]
   end
 
