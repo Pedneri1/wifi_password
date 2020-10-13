@@ -35,6 +35,23 @@ defmodule WifiPassword do
             {:ok, passwd |> String.replace("\n", "")}
         end
 
+      {:unix, :linux} ->
+        case System.cmd("nmcli", [
+               "--show-secrets",
+               "--get-values",
+               "802-11-wireless-security.psk,802-11-wireless-security.wep-key0",
+               "connection",
+               "show",
+               "id",
+               ssid
+             ]) do
+          {_any, 10} ->
+            {:error, :not_found}
+
+          {passwd, 0} ->
+            {:ok, passwd |> String.replace("\n", "")}
+        end
+
       {:win32, :nt} ->
         {:error, :not_implemented}
     end
