@@ -38,7 +38,10 @@ defmodule WifiPassword do
       {:unix, :linux} ->
         case System.cmd("nmcli", [
                "--show-secrets",
-               "--get-values",
+               "--mode",
+               "tabular",
+               "--terse",
+               "--fields",
                "802-11-wireless-security.psk,802-11-wireless-security.wep-key0",
                "connection",
                "show",
