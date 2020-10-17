@@ -52,7 +52,7 @@ defmodule WifiPassword do
             {:error, :not_found}
 
           {passwd, 0} ->
-            {:ok, passwd |> String.replace("\n", "")}
+            {:ok, passwd |> String.replace(~r/^--$/m, "") |> String.replace("\n", "")}
         end
 
       {:win32, :nt} ->
