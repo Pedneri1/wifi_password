@@ -66,10 +66,13 @@ defmodule WifiPassword do
           {_any, 10} ->
             {:error, :not_found}
 
+          {_any, 1} ->
+            {:error, :not_found}
+
           {passwd, 0} ->
-            case Regex.run(~r/Key Content\s*:\s(.*)\r\n/, passwd) |> Enum.at(-1) do
+            case Regex.run(~r/Key Content\s*:\s(.*)\r\n/, passwd) do
               nil -> {:error, :not_found}
-              formatted_passwd when is_binary(formatted_passwd) -> {:ok, formatted_passwd}
+              [_, formatted_passwd] when is_binary(formatted_passwd) -> {:ok, formatted_passwd}
               _ -> {:error, :not_found}
             end
         end
