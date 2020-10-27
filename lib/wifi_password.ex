@@ -56,7 +56,23 @@ defmodule WifiPassword do
         end
 
       {:win32, :nt} ->
-        {:error, :not_implemented}
+        case System.cmd("netsh", [
+               "wlan",
+               "show",
+               "profile",
+               ssid,
+               "key=clear"
+             ]) do
+          {_any, 10} ->
+            {:error, :not_found}
+
+          {passwd, 0} ->
+            case Regex.run(~r/Key Content\s*:\s(.*)\r\n/, passwd) |> Enum.at(-1) do
+              nil -> {:error, :not_found}
+              formatted_passwd when is_binary(formatted_passwd) -> {:ok, formatted_passwd}
+              _ -> {:error, :not_found}
+            end
+        end
     end
   end
 end
